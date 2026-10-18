@@ -1,4 +1,3 @@
-
 CREATE TABLE sales (
     product VARCHAR(50),
     quantity INT,
@@ -80,3 +79,28 @@ JOIN orders AS o
     ON c.customer_id = o.customer_id
 GROUP BY c.customer_id, c.customer_name
 ORDER BY total_revenue DESC;
+
+SELECT TOP 3
+    c.customer_name,
+    SUM(o.quantity * o.price) AS total_revenue
+FROM customers c
+JOIN orders o
+    ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.customer_name
+ORDER BY total_revenue DESC;
+SELECT
+    product,
+    SUM(quantity) AS units_sold,
+    SUM(quantity * price) AS total_revenue
+FROM orders
+GROUP BY product
+ORDER BY total_revenue DESC;
+SELECT
+    c.city,
+    SUM(o.quantity * o.price) AS total_revenue
+FROM customers c
+JOIN orders o
+    ON c.customer_id = o.customer_id
+GROUP BY c.city
+ORDER BY total_revenue DESC;
+
